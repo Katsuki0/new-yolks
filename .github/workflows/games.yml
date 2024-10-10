@@ -9,8 +9,8 @@ on:
     paths:
       - games/**
 jobs:
-  pushAMD64:
-    name: "games_AMD64:${{ matrix.game }}"
+  push:
+    name: "games:source"
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -30,8 +30,8 @@ jobs:
           password: ${{ secrets.REGISTRY_TOKEN }}
       - uses: docker/build-push-action@v5
         with:
-          context: ./games/${{ matrix.game }}
-          file: ./games/${{ matrix.game }}/Dockerfile
+          context: ./games/source
+          file: ./games/source/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
